@@ -16,12 +16,6 @@ const reducer = (state, action) => {
 				data: [...state.data, action.payload],
 			};
 		}
-		case "SET_ICON": {
-			return {
-				...state,
-				icon: action.payload,
-			};
-		}
 		case "SET_NOTIFICATION": {
 			return {
 				...state,
@@ -35,9 +29,9 @@ const reducer = (state, action) => {
 
 const initialState = {
 	isLoading: false,
-	data: [],
-	icon: "",
 	notice: false,
+	data: [],
+	avgAlt: [],
 };
 
 const StateContextProvider = ({ children }) => {
