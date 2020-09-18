@@ -1,4 +1,5 @@
 import React from "react";
+import "./header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,7 +8,7 @@ const Header = () => {
 		<div className="header-container">
 			<div className="header-content">
 				Nestio Space Program
-				<FontAwesomeIcon id="wx-icon" size="lg" icon={faRocket} />
+				<FontAwesomeIcon id="rkt-icon" size="lg" icon={faRocket} />
 			</div>
 		</div>
 	);

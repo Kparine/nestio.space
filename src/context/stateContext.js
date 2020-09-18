@@ -13,7 +13,7 @@ const reducer = (state, action) => {
 		case "SET_DATA": {
 			return {
 				...state,
-				data: action.payload,
+				data: [...state.data, action.payload],
 			};
 		}
 		case "SET_ICON": {
@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 		case "SET_NOTIFICATION": {
 			return {
 				...state,
-				icon: action.payload,
+				notification: action.payload,
 			};
 		}
 		default:
@@ -35,7 +35,7 @@ const reducer = (state, action) => {
 
 const initialState = {
 	isLoading: false,
-	data: {},
+	data: [],
 	icon: "",
 	notice: false,
 };

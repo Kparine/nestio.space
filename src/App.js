@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/header";
-import DataCard from "./components/data-card";
+import Header from "./components/Header/header";
+import DataCard from "./components/Data-Card/data-card";
 
 import StateContextProvider from "./context/stateContext";
 
