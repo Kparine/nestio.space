@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useContext } from "react";
 import "./data-chart.css";
 import { StateContext } from "../../context/stateContext";
-import moment from "moment";
 
 import { select } from "d3";
 
@@ -21,9 +20,7 @@ const DataChart = () => {
 						enter
 							.append("circle")
 							.attr("r", 10)
-							.attr("cx", (value) =>
-								moment(value.last_updated).format("hh:mm:ss")
-							)
+							.attr("cx", (value) => value.last_updated)
 							.attr("cy", (value) => value.altitude.toFixed(2))
 							.attr("fill", "white")
 							.attr("stroke", "black"),
