@@ -2,18 +2,11 @@ import React, { useContext } from "react";
 import "./data-card.css";
 
 import { StateContext } from "../../context/stateContext";
-import { useInterval } from "../../custom-hooks/useInterval";
 
-import { getData } from "../../utils/utils";
 
 const DataCurr = () => {
-	const { state, dispatch } = useContext(StateContext);
+	const { state} = useContext(StateContext);
 	const { data } = state;
-
-	useInterval(async () => {
-		const res = await getData();
-		dispatch({ type: "SET_DATA", payload: res.data });
-	}, 2000);
 
 	const currentAltitude = () => {
 		if (!data.length) return null;
@@ -21,7 +14,7 @@ const DataCurr = () => {
 		if (data[data.length - 1].altitude === "NaN") return null;
 		return <div>Current Alt: {currentAlt}</div>;
 	};
-	return <>{currentAltitude()}</>;
+	return <div>{currentAltitude()}</div>;
 };
 
 export default DataCurr;
