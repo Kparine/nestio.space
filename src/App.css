@@ -1,10 +1,9 @@
 .App {
-	text-align: center;
-}
-
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
+	position: absolute;
+	min-width: 100%;
+	min-height: 100vh;
+	background: #ccb808;
+	background: linear-gradient(0deg, #ccb808 0%, #969fb0 51%, #01236e 100%);
 }
 
 @media (prefers-reduced-motion: no-preference) {

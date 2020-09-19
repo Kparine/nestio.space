@@ -22,6 +22,12 @@ const reducer = (state, action) => {
 				notification: action.payload,
 			};
 		}
+		case "SET_LOW_AVG_TIME": {
+			return {
+				...state,
+				lowAvgStartTime: action.payload,
+			};
+		}
 		default:
 			throw new Error();
 	}
@@ -29,9 +35,9 @@ const reducer = (state, action) => {
 
 const initialState = {
 	isLoading: false,
-	notice: false,
+	notification: false,
 	data: [],
-	avgAlt: [],
+	lowAvgStartTime: {},
 };
 
 const StateContextProvider = ({ children }) => {
