@@ -5,13 +5,13 @@ import { StateContext } from "../../context/stateContext";
 
 const DataCurr = () => {
 	const { state } = useContext(StateContext);
-	const { data } = state;
+	const { satData } = state;
 
 	const currentAltitude = () => {
-		if (!data.length) return null;
-		if (isNaN(data[data.length - 1].altitude)) return null;
-		let currentAlt = data[data.length - 1].altitude.toFixed(2);
-		return <div>Curr. Alt.: {currentAlt} km</div>;
+		if (!satData.length) return null;
+		if (isNaN(satData[satData.length - 1].altitude)) return null;
+		let currentAlt = satData[satData.length - 1].altitude;
+		return <div>Current Altitude: {currentAlt} km</div>;
 	};
 	return currentAltitude();
 };

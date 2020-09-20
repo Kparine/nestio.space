@@ -5,6 +5,6 @@ export const getData = async () => {
 		const res = await axios.get(`http://nestio.space/api/satellite/data`);
 		return res;
 	} catch (err) {
-		console.log("err ******------>>>>>>", err);
+		console.error("err ******------>>>>>>", err);
 	}
 };

@@ -6,7 +6,7 @@ const DataAvg = () => {
 	const { state } = useContext(StateContext);
 	const { avg } = state;
 	if (isNaN(avg)) return null;
-	return <div>Avg. Alt.: {avg} km</div>;
+	return <div>Average Altitude: {avg} km</div>;
 };
 
 export default DataAvg;

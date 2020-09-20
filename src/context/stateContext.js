@@ -14,13 +14,13 @@ const reducer = (state, action) => {
 		case SET_DATA_ACTION: {
 			return {
 				...state,
-				data: [...state.data, action.payload],
+				satData: [...state.satData, action.payload],
 			};
 		}
 		case SET_NOTIFICATION_ACTION: {
 			return {
 				...state,
-				notification: action.payload,
+				notification: [...state.notification, action.payload],
 			};
 		}
 		case INCREMENT_WARNING_ACTION:
@@ -44,9 +44,8 @@ const reducer = (state, action) => {
 };
 
 const initialState = {
-	isLoading: false,
-	notification: false,
-	data: [],
+	notification: [],
+	satData: [],
 	avg: NaN,
 	warningTime: 0,
 };

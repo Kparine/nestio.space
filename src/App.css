@@ -6,6 +6,19 @@
 	background: linear-gradient(0deg, #ccb808 0%, #969fb0 51%, #01236e 100%);
 }
 
+.app-container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin: 30px;
+}
+
+.app-data-row {
+	display: flex;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	.App-logo {
 		animation: App-logo-spin infinite 20s linear;

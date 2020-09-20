@@ -1,41 +1,60 @@
-import React, { useRef, useEffect, useContext } from "react";
-import "./data-chart.css";
+import React, { useContext } from "react";
 import { StateContext } from "../../context/stateContext";
 
-import { select } from "d3";
+import {
+	LineChart,
+	Line,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	Legend,
+	ReferenceLine,
+	Label,
+} from "recharts";
 
 const DataChart = () => {
 	const { state } = useContext(StateContext);
-	const { data } = state;
-	const svgRef = useRef();
-
-	useEffect(() => {
-		const svg = select(svgRef.current);
-		if (data.length) {
-			svg
-				.selectAll("circle")
-				.data(data)
-				.join(
-					(enter) =>
-						enter
-							.append("circle")
-							.attr("r", 10)
-							.attr("cx", (value) => value.last_updated)
-							.attr("cy", (value) => value.altitude.toFixed(2))
-							.attr("fill", "white")
-							.attr("stroke", "black"),
-					(update) => update.attr("class", "updated"),
-					(exit) => exit.remove()
-				);
-		}
-	}, [data]);
+	const { satData } = state;
 
 	return (
 		<div className="data-chart-container">
 			<div className="data-chart-content">
-				<svg id="svg-content" ref={svgRef}></svg>
+				<LineChart
+					width={750}
+					height={500}
+					data={satData}
+					margin={{
+						top: 5,
+						right: 30,
+						left: 30,
+						bottom: 5,
+					}}
+				>
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis dataKey="last_updated" name="time" interval="preserveEnd" />
+					<YAxis domain={["dataMin - 50", "dataMax + 50"]}>
+						<Label
+							label={{
+								value: "Altitude",
+								angle: -90,
+								position: "insideLeft",
+							}}
+						/>
+					</YAxis>
+					<Tooltip />
+					<Legend />
+					<ReferenceLine y={160} label="Low Altitude" stroke="red" />
+					<Line
+						type="monotone"
+						dataKey="altitude"
+						stroke="#087fff"
+						activeDot={{ r: 5 }}
+					/>
+				</LineChart>
 			</div>
 		</div>
 	);
 };
+
 export default DataChart;
