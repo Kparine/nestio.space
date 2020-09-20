@@ -12,6 +12,8 @@ import {
 	RESET_WARNING_TIME_ACTION,
 	SET_NOTIFICATION_ACTION,
 	SET_PREV_LOW_ACTION,
+	INCREMENT_SAFE_ACTION,
+	RESET_SAFE_TIME_ACTION,
 } from "../../constants/action-constants";
 import {
 	LOW_AVG_PARAM,
@@ -61,7 +63,8 @@ const DataCard = () => {
 		dispatch({ type: SET_AVERAGE_ACTION, payload: avg });
 		dispatch({ type: SET_DATA_ACTION, payload: processed });
 
-		if (avg < LOW_AVG_PARAM || prevLow) {
+		/** LOW ORBIT **/
+		if (avg < LOW_AVG_PARAM) {
 			dispatch({
 				type: INCREMENT_WARNING_ACTION,
 				payload: POLLING_INTERVAL_PARAM,
@@ -70,20 +73,32 @@ const DataCard = () => {
 			dispatch({ type: RESET_WARNING_TIME_ACTION });
 		}
 
-		if (WARNING_TIME_PARAM <= warningTime && !prevLow) {
+		if (WARNING_TIME_PARAM <= warningTime) {
 			dispatch({
 				type: SET_NOTIFICATION_ACTION,
 				payload: { msg: "warn", time: processed.last_updated },
 			});
-			dispatch({ type: RESET_WARNING_TIME_ACTION });
 			dispatch({ type: SET_PREV_LOW_ACTION, payload: true });
-		} else if (WARNING_TIME_PARAM <= warningTime && prevLow) {
+			dispatch({ type: RESET_WARNING_TIME_ACTION });
+		}
+
+		/** SAFE ORBIT **/
+		if (avg > LOW_AVG_PARAM && prevLow) {
+			dispatch({
+				type: INCREMENT_SAFE_ACTION,
+				payload: POLLING_INTERVAL_PARAM,
+			});
+		} else if (warningTime !== 0) {
+			dispatch({ type: RESET_SAFE_TIME_ACTION });
+		}
+
+		if (WARNING_TIME_PARAM <= warningTime && prevLow) {
 			dispatch({
 				type: SET_NOTIFICATION_ACTION,
 				payload: { msg: "safe", time: processed.last_updated },
 			});
-			dispatch({ type: RESET_WARNING_TIME_ACTION });
 			dispatch({ type: SET_PREV_LOW_ACTION });
+			dispatch({ type: RESET_SAFE_TIME_ACTION });
 		}
 	}, POLLING_INTERVAL_PARAM);
 
