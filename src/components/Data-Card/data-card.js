@@ -27,11 +27,10 @@ const avgAltitude = (prevData) => {
 			.reduce((prev, curr) => prev + curr, 0);
 
 		let avg = sum / totalDataEntries;
-
+		avg = parseFloat(avg.toFixed(2));
 		return avg;
 	}
 };
-
 const processData = (datum) => {
 	let processed = {
 		altitude: parseFloat(datum.altitude.toFixed(2)),
