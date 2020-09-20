@@ -1,0 +1,9 @@
+.data-chart-container {
+	min-width: 750px;
+	height: 500px;
+}
+
+.data-chart-content {
+	background-color: #000;
+	opacity: 0.8;
+}

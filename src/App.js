@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Header from "./components/Header/header";
+import DataCard from "./components/Data-Card/data-card";
+import DataChart from "./components/Data-Chart/data-chart";
+import NotificationList from "./components/Notification/notification-list";
+
+import StateContextProvider from "./context/stateContext";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<StateContextProvider>
+				<Header />
+				<div className="app-container">
+					<div className="app-data-row">
+						<DataCard />
+					</div>
+					<div className="app-data-row">
+						<DataChart />
+						<NotificationList />
+					</div>
+				</div>
+			</StateContextProvider>
+		</div>
+	);
 }
 
 export default App;
