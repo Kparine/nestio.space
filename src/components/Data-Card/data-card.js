@@ -11,6 +11,7 @@ import {
 	INCREMENT_WARNING_ACTION,
 	RESET_WARNING_TIME_ACTION,
 	SET_NOTIFICATION_ACTION,
+	SET_PREV_LOW_ACTION,
 } from "../../constants/action-constants";
 import {
 	LOW_AVG_PARAM,
@@ -41,7 +42,7 @@ const processData = (datum) => {
 
 const DataCard = () => {
 	const { state, dispatch } = useContext(StateContext);
-	const { satData, warningTime } = state;
+	const { satData, warningTime, prevLow } = state;
 
 	useEffect(() => {
 		async function asyncEffect() {
@@ -56,10 +57,11 @@ const DataCard = () => {
 		const { data } = await getData();
 		const processed = processData(data);
 		const avg = avgAltitude(satData);
+
 		dispatch({ type: SET_AVERAGE_ACTION, payload: avg });
 		dispatch({ type: SET_DATA_ACTION, payload: processed });
 
-		if (avg < LOW_AVG_PARAM) {
+		if (avg < LOW_AVG_PARAM || prevLow) {
 			dispatch({
 				type: INCREMENT_WARNING_ACTION,
 				payload: POLLING_INTERVAL_PARAM,
@@ -68,12 +70,20 @@ const DataCard = () => {
 			dispatch({ type: RESET_WARNING_TIME_ACTION });
 		}
 
-		if (WARNING_TIME_PARAM <= warningTime) {
+		if (WARNING_TIME_PARAM <= warningTime && !prevLow) {
 			dispatch({
 				type: SET_NOTIFICATION_ACTION,
-				payload: { msg: "warn", time: satData.last_updated },
+				payload: { msg: "warn", time: processed.last_updated },
 			});
 			dispatch({ type: RESET_WARNING_TIME_ACTION });
+			dispatch({ type: SET_PREV_LOW_ACTION, payload: true });
+		} else if (WARNING_TIME_PARAM <= warningTime && prevLow) {
+			dispatch({
+				type: SET_NOTIFICATION_ACTION,
+				payload: { msg: "safe", time: processed.last_updated },
+			});
+			dispatch({ type: RESET_WARNING_TIME_ACTION });
+			dispatch({ type: SET_PREV_LOW_ACTION });
 		}
 	}, POLLING_INTERVAL_PARAM);
 

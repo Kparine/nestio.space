@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StateContext } from "../../context/stateContext";
-
+import { LOW_AVG_PARAM } from "../../constants/param-constants";
 import {
 	LineChart,
 	Line,
@@ -44,7 +44,7 @@ const DataChart = () => {
 					</YAxis>
 					<Tooltip />
 					<Legend />
-					<ReferenceLine y={160} label="Low Altitude" stroke="red" />
+					<ReferenceLine y={LOW_AVG_PARAM} label="Low Altitude" stroke="red" />
 					<Line
 						type="monotone"
 						dataKey="altitude"

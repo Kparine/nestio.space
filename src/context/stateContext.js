@@ -5,6 +5,7 @@ import {
 	SET_DATA_ACTION,
 	SET_AVERAGE_ACTION,
 	RESET_WARNING_TIME_ACTION,
+	SET_PREV_LOW_ACTION,
 } from "../constants/action-constants";
 
 export const StateContext = createContext({});
@@ -38,6 +39,11 @@ const reducer = (state, action) => {
 				...state,
 				warningTime: 0,
 			};
+		case SET_PREV_LOW_ACTION:
+			return {
+				...state,
+				prevLow: action.payload,
+			};
 		default:
 			throw new Error();
 	}
@@ -48,6 +54,7 @@ const initialState = {
 	satData: [],
 	avg: NaN,
 	warningTime: 0,
+	prevLow: false,
 };
 
 const StateContextProvider = ({ children }) => {
