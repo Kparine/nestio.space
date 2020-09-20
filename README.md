@@ -18,7 +18,7 @@ npm install
 npm run test
 ```
 
-#### Technologies Utilized:
+## Technologies Utilized:
 
 - React/React Hooks
   - Redux-esque predicatable state container utilized through useContext/useReducer
@@ -27,10 +27,10 @@ npm run test
 - Fontawesome React
 - Moment.js
 
-#### Additional Time:
+## Additional Time:
 
-- Considerations I would have made with more time.
-  - Track and graphically display average altitude.
-  - Make responsive, including mobile.
-  - More thorough testing
-  - Create error notification for API calls
+Considerations I would have made with more time.
+- Track and graphically display average altitude.
+- Make responsive, including mobile.
+- More thorough testing
+- Create error notification for API calls
