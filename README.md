@@ -2,12 +2,18 @@
 
 ### Welcome to the Nestio/Funnel Partnership Space Program
 
-## To Install
+## Install
 
 - Fork or clone from [GitHub](https://github.com/Kparine/nestio.space)
 
 ```
 npm install
+```
+
+## Run Application
+
+```
+npm run start
 ```
 
 ## Run Tests
@@ -33,4 +39,5 @@ Considerations I would have made with more time.
 - Track and graphically display average altitude.
 - Make responsive, including mobile.
 - More thorough testing
+- Cease polling after 10 minutes
 - Create error notification for API calls
