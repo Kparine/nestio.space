@@ -70,7 +70,7 @@ const initialState = {
 	prevLow: false,
 };
 
-const StateContextProvider = ({ children }) => {
+export const StateContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	const contextValue = useMemo(
@@ -87,4 +87,3 @@ const StateContextProvider = ({ children }) => {
 		</StateContext.Provider>
 	);
 };
-export default StateContextProvider;

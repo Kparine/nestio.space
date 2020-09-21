@@ -5,7 +5,7 @@ import DataCard from "./components/Data-Card/data-card";
 import DataChart from "./components/Data-Chart/data-chart";
 import NotificationList from "./components/Notification/notification-list";
 
-import StateContextProvider from "./context/stateContext";
+import { StateContextProvider } from "./context/stateContext";
 
 function App() {
 	return (

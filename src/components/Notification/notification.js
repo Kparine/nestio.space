@@ -5,6 +5,7 @@ import {
 	faCheckCircle,
 	faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
+import uuid from "uuid/v5";
 import "./notification.css";
 
 const Notification = () => {
@@ -28,6 +29,7 @@ const Notification = () => {
 			{notification.map((item) => {
 				return (
 					<div
+						key={uuid()}
 						className="notification-content"
 						style={item.msg === "safe" ? styles.safe : styles.warn}
 					>
