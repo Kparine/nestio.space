@@ -5,8 +5,8 @@ import {
 	faCheckCircle,
 	faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
+import uuid from "uuid/v5";
 import "./notification.css";
-import moment from "moment";
 
 const Notification = () => {
 	const { state } = useContext(StateContext);
@@ -29,6 +29,7 @@ const Notification = () => {
 			{notification.map((item) => {
 				return (
 					<div
+						key={uuid()}
 						className="notification-content"
 						style={item.msg === "safe" ? styles.safe : styles.warn}
 					>
@@ -38,8 +39,7 @@ const Notification = () => {
 							icon={item.msg === "safe" ? faCheckCircle : faExclamationTriangle}
 							color={item.msg === "safe" ? "green" : "red"}
 						/>
-						{item.msg === "safe" ? message.safe : message.warn}(
-						{moment(item.time).format("hh:mm:ss")})
+						{item.msg === "safe" ? message.safe : message.warn} ({item.time})
 					</div>
 				);
 			})}
