@@ -4,6 +4,7 @@ import Header from "./components/Header/header";
 import DataCard from "./components/Data-Card/data-card";
 import DataChart from "./components/Data-Chart/data-chart";
 import NotificationList from "./components/Notification/notification-list";
+import { getData } from "../src/utils/utils";
 
 import { StateContextProvider } from "./context/stateContext";
 
@@ -14,7 +15,7 @@ function App() {
 				<Header />
 				<div className="app-container">
 					<div className="app-data-row">
-						<DataCard />
+						<DataCard getData={getData} />
 					</div>
 					<div className="app-data-row">
 						<DataChart />

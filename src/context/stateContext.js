@@ -10,9 +10,18 @@ import {
 	SET_PREV_LOW_ACTION,
 } from "../constants/action-constants";
 
-export const StateContext = createContext({});
+const initialState = {
+	notification: [],
+	satData: [],
+	avg: NaN,
+	warningTime: 0,
+	safeTime: 0,
+	prevLow: false,
+};
+const StateContext = createContext(initialState);
+export { StateContext };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case SET_DATA_ACTION: {
 			return {
@@ -59,15 +68,6 @@ const reducer = (state, action) => {
 		default:
 			throw new Error();
 	}
-};
-
-const initialState = {
-	notification: [],
-	satData: [],
-	avg: NaN,
-	warningTime: 0,
-	safeTime: 0,
-	prevLow: false,
 };
 
 export const StateContextProvider = ({ children }) => {
