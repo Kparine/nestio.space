@@ -21,7 +21,7 @@ const initialState = {
 const StateContext = createContext(initialState);
 export { StateContext };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case SET_DATA_ACTION: {
 			return {

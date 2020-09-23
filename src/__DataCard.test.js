@@ -1,35 +1,33 @@
 import React from "react";
-import { mount } from "enzyme";
 import { StateContext, StateContextProvider } from "./context/stateContext";
+import { render, wait } from "@testing-library/react";
 import DataCard from "./components/Data-Card/data-card";
-import DataAvg from "./components/Data-Card/avg-data";
-import DataCurr from "./components/Data-Card/curr-data";
+
+const responses = [
+	{ data: { altitude: 123, last_updated: "2020-09-23T02:19:37.860Z" } },
+	{ data: { altitude: 126, last_updated: "2020-09-23T02:19:47.860Z" } },
+	{ data: { altitude: 173, last_updated: "2020-09-23T02:19:57.860Z" } },
+	{ data: { altitude: 173, last_updated: "2020-09-23T02:19:57.860Z" } },
+];
+
+function mockGetData() {
+	return responses.shift();
+}
+
+const TestComponent = () => {
+	return (
+		<StateContextProvider value={StateContext}>
+			<DataCard getData={mockGetData} />
+		</StateContextProvider>
+	);
+};
 
 describe("<DataCard />", () => {
-	let wrapper;
-
-	beforeEach(() => {
-		wrapper = mount(
-			<StateContextProvider>
-				<DataCard />
-			</StateContextProvider>
-		);
-	});
-	console.log("StateContext ******------>>>>>>", StateContext);
-
-	it("should exist and load context", () => {
-		expect(wrapper).not.toBeNull();
-		expect(wrapper).toHaveLength(1);
-	});
-	it("match snapshot", () => {
-		expect(wrapper).toMatchSnapshot();
-	});
-	it("should exist and render DataAvg Component", () => {
-		expect(wrapper.find(DataAvg)).not.toBeNull();
-		expect(wrapper.find(DataAvg)).toHaveLength(1);
-	});
-	it("should exist and render DataCurr Component", () => {
-		expect(wrapper.find(DataCurr)).not.toBeNull();
-		expect(wrapper.find(DataCurr)).toHaveLength(1);
+	it("accept and process data from api", async () => {
+		const { getByText } = render(<TestComponent />);
+		await wait();
+		expect(getByText("Current Altitude: 123 km")).toBeInTheDocument();
+		await wait();
+		expect(getByText("Current Altitude: 126 km")).toBeInTheDocument();
 	});
 });

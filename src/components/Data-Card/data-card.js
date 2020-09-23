@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import "./data-card.css";
 import DataCurr from "./curr-data";
 import DataAvg from "./avg-data";
-import { getData } from "../../utils/utils";
 import { useInterval } from "../../custom-hooks/useInterval";
 import moment from "moment";
 import {
@@ -42,21 +41,24 @@ const processData = (datum) => {
 	return processed;
 };
 
-const DataCard = () => {
+const DataCard = (props) => {
 	const { state, dispatch } = useContext(StateContext);
 	const { satData, warningTime, prevLow } = state;
-
 	useEffect(() => {
 		async function asyncEffect() {
-			const { data } = await getData();
-			const processed = processData(data);
-			dispatch({ type: SET_DATA_ACTION, payload: processed });
+			try {
+				const { data } = await props.getData();
+				const processed = processData(data);
+				dispatch({ type: SET_DATA_ACTION, payload: processed });
+			} catch (err) {
+				console.log("err ******------>>>>>>", err);
+			}
 		}
 		asyncEffect();
 	}, []);
 
 	useInterval(async () => {
-		const { data } = await getData();
+		const { data } = await props.getData();
 		const processed = processData(data);
 		const avg = avgAltitude(satData);
 
