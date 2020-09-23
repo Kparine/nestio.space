@@ -33,7 +33,7 @@ const DataChart = () => {
 				>
 					<CartesianGrid strokeDasharray="3 3" />
 					<XAxis dataKey="last_updated" name="time" interval="preserveEnd" />
-					<YAxis domain={["dataMin - 50", "dataMax + 50"]}>
+					<YAxis domain={["dataMin - 40", "dataMax + 40"]}>
 						<Label
 							label={{
 								value: "Altitude",
@@ -44,7 +44,11 @@ const DataChart = () => {
 					</YAxis>
 					<Tooltip />
 					<Legend />
-					<ReferenceLine y={LOW_AVG_PARAM} label="Low Altitude" stroke="red" />
+					<ReferenceLine
+						y={LOW_AVG_PARAM}
+						label="Low Earth Orbit Threshold ~160 km"
+						stroke="red"
+					/>
 					<Line
 						type="monotone"
 						dataKey="altitude"
